@@ -1,0 +1,26 @@
+name: Anchorwars
+version: '0.9'
+main: me.miran.anchorwars.core.Main
+api-version: 1.16
+authors: [ Miran ]
+description: Anchor Wars plugin.
+website: https://www.youtube.com/channel/UCEGXLe4UttA9FOzGliB4g9w
+commands:
+  .setBorderSize:
+  .setCrystalPower:
+  .clearBlocks:
+  .setCombatCoolDown:
+  .setYBorder:
+  .setTeam:
+  .setMinPlayersWaiting:
+  .setAnchorPercentage:
+  .setup:
+  .teleport:
+  .setYaw:
+  shout:
+  hub:
+  leave:
+  lobby:
+
+
+

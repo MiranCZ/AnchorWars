@@ -1,0 +1,522 @@
+Shop:
+  main:
+    size: 36
+    name: Shop
+    loadSections:
+      0: blocks
+      1: swords
+      2: food
+      3: armor
+      4: bows
+      5: tools
+      6: axes
+      7: special
+  blocks:
+    size: 27
+    name: Blocks
+    representativeItem: SANDSTONE
+    slotInMain: 10
+    contents:
+      '9':
+        material: SANDSTONE
+        amount: 4
+        cost: 4
+        materialCost: BRICK
+      '10':
+        material: HAY_BLOCK
+        amount: 2
+        cost: 10
+        materialCost: BRICK
+      '11':
+        material: GLASS
+        amount: 2
+        cost: 2
+        materialCost: BRICK
+      '12':
+        material: COBWEB
+        amount: 8
+        cost: 5
+        materialCost: IRON_INGOT
+      '13':
+        material: SCAFFOLDING
+        amount: 16
+        cost: 20
+        materialCost: IRON_INGOT
+      '14':
+        material: GLOWSTONE
+        amount: 16
+        cost: 20
+        materialCost: BRICK
+      '15':
+        material: OBSIDIAN
+        amount: 4
+        cost: 20
+        materialCost: GOLD_INGOT
+      '16':
+        material: RESPAWN_ANCHOR
+        amount: 8
+        cost: 16
+        materialCost: NETHERITE_INGOT
+      '17':
+        material: END_CRYSTAL
+        amount: 8
+        cost: 20
+        materialCost: NETHERITE_INGOT
+  swords:
+    size: 27
+    name: Swords
+    representativeItem: IRON_SWORD
+    slotInMain: 11
+    contents:
+      '11':
+        material: WOODEN_SWORD
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '12':
+        material: STONE_SWORD
+        amount: 1
+        cost: 30
+        materialCost: BRICK
+      '13':
+        material: IRON_SWORD
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '14':
+        material: DIAMOND_SWORD
+        amount: 1
+        cost: 10
+        materialCost: GOLD_INGOT
+      '15':
+        material: NETHERITE_SWORD
+        amount: 1
+        cost: 16
+        materialCost: NETHERITE_INGOT
+      '22':
+        material: TRIDENT
+        amount: 1
+        cost: 50
+        materialCost: GOLD_INGOT
+  food:
+    size: 27
+    name: Food
+    representativeItem: COOKED_BEEF
+    slotInMain: 12
+    contents:
+      '10':
+        material: COOKED_BEEF
+        amount: 4
+        cost: 4
+        materialCost: BRICK
+      '11':
+        material: BREAD
+        amount: 8
+        cost: 4
+        materialCost: BRICK
+      '12':
+        material: CAKE
+        amount: 1
+        cost: 1
+        materialCost: IRON_INGOT
+      '13':
+        material: HONEY_BOTTLE
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '14':
+        material: DRIED_KELP
+        amount: 8
+        cost: 2
+        materialCost: IRON_INGOT
+      '15':
+        material: GOLDEN_APPLE
+        amount: 2
+        cost: 4
+        materialCost: GOLD_INGOT
+      '16':
+        material: ENCHANTED_GOLDEN_APPLE
+        amount: 1
+        cost: 10
+        materialCost: NETHERITE_INGOT
+  armor:
+    size: 45
+    name: Armor
+    representativeItem: NETHERITE_CHESTPLATE
+    slotInMain: 13
+    contents:
+      '1':
+        material: LEATHER_HELMET
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '2':
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '3':
+        material: LEATHER_LEGGINGS
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '4':
+        material: LEATHER_BOOTS
+        amount: 1
+        cost: 10
+        materialCost: BRICK
+      '6':
+        material: LEATHER_HORSE_ARMOR
+        amount: 1
+        cost: 15
+        materialCost: BRICK
+      '10':
+        material: CHAINMAIL_HELMET
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '11':
+        material: CHAINMAIL_CHESTPLATE
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '12':
+        material: CHAINMAIL_LEGGINGS
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '13':
+        material: CHAINMAIL_BOOTS
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '15':
+        material: TURTLE_HELMET
+        amount: 1
+        cost: 12
+        materialCost: IRON_INGOT
+      '19':
+        material: IRON_HELMET
+        amount: 1
+        cost: 20
+        materialCost: IRON_INGOT
+      '20':
+        material: IRON_CHESTPLATE
+        amount: 1
+        cost: 20
+        materialCost: IRON_INGOT
+      '21':
+        material: IRON_LEGGINGS
+        amount: 1
+        cost: 20
+        materialCost: IRON_INGOT
+      '22':
+        material: IRON_BOOTS
+        amount: 1
+        cost: 20
+        materialCost: IRON_INGOT
+      '24':
+        material: IRON_HORSE_ARMOR
+        amount: 1
+        cost: 20
+        materialCost: IRON_INGOT
+      '28':
+        material: DIAMOND_HELMET
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '29':
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '30':
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '31':
+        material: DIAMOND_BOOTS
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '33':
+        material: DIAMOND_HORSE_ARMOR
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '37':
+        material: NETHERITE_HELMET
+        amount: 1
+        cost: 10
+        materialCost: NETHERITE_INGOT
+      '38':
+        material: NETHERITE_CHESTPLATE
+        amount: 1
+        cost: 10
+        materialCost: NETHERITE_INGOT
+      '39':
+        material: NETHERITE_LEGGINGS
+        amount: 1
+        cost: 10
+        materialCost: NETHERITE_INGOT
+      '40':
+        material: NETHERITE_BOOTS
+        amount: 1
+        cost: 10
+        materialCost: NETHERITE_INGOT
+      '42':
+        material: ELYTRA
+        amount: 1
+        cost: 20
+        materialCost: NETHERITE_INGOT
+  tools:
+    size: 36
+    name: Tools
+    representativeItem: IRON_PICKAXE
+    slotInMain: 14
+    contents:
+      '11':
+        material: STONE_PICKAXE
+        amount: 1
+        cost: 8
+        materialCost: BRICK
+      '12':
+        material: GOLDEN_PICKAXE
+        amount: 1
+        cost: 4
+        materialCost: IRON_INGOT
+      '13':
+        material: IRON_PICKAXE
+        amount: 1
+        cost: 8
+        materialCost: IRON_INGOT
+      '14':
+        material: DIAMOND_PICKAXE
+        amount: 1
+        cost: 8
+        materialCost: GOLD_INGOT
+      '15':
+        material: NETHERITE_PICKAXE
+        amount: 1
+        cost: 4
+        materialCost: NETHERITE_INGOT
+      '20':
+        material: STONE_SHOVEL
+        amount: 1
+        cost: 8
+        materialCost: BRICK
+      '21':
+        material: GOLDEN_SHOVEL
+        amount: 1
+        cost: 4
+        materialCost: IRON_INGOT
+      '22':
+        material: IRON_SHOVEL
+        amount: 1
+        cost: 8
+        materialCost: IRON_INGOT
+      '23':
+        material: DIAMOND_SHOVEL
+        amount: 1
+        cost: 8
+        materialCost: GOLD_INGOT
+      '24':
+        material: NETHERITE_SHOVEL
+        amount: 1
+        cost: 4
+        materialCost: NETHERITE_INGOT
+  bows:
+    size: 27
+    name: Bows
+    representativeItem: BOW
+    slotInMain: 15
+    contents:
+      '12':
+        material: BOW
+        amount: 1
+        cost: 5
+        materialCost: IRON_INGOT
+      '14':
+        material: CROSSBOW
+        amount: 1
+        cost: 10
+        materialCost: IRON_INGOT
+      '21':
+        material: ARROW
+        amount: 8
+        cost: 4
+        materialCost: GOLD_INGOT
+      '23':
+        material: SPECTRAL_ARROW
+        amount: 4
+        cost: 8
+        materialCost: GOLD_INGOT
+  axes:
+    size: 27
+    name: Axes
+    representativeItem: DIAMOND_AXE
+    slotInMain: 16
+    contents:
+      '4':
+        material: SHIELD
+        amount: 1
+        cost: 5
+        materialCost: IRON_INGOT
+      '11':
+        material: WOODEN_AXE
+        amount: 1
+        cost: 20
+        materialCost: BRICK
+      '12':
+        material: STONE_AXE
+        amount: 1
+        cost: 40
+        materialCost: BRICK
+      '13':
+        material: IRON_AXE
+        amount: 1
+        cost: 15
+        materialCost: IRON_INGOT
+      '14':
+        material: DIAMOND_AXE
+        amount: 1
+        cost: 15
+        materialCost: GOLD_INGOT
+      '15':
+        material: NETHERITE_AXE
+        amount: 1
+        cost: 20
+        materialCost: NETHERITE_INGOT
+  special:
+    size: 45
+    name: Special
+    representativeItem: TNT
+    slotInMain: 22
+    contents:
+      '13':
+        material: TOTEM_OF_UNDYING
+        amount: 1
+        cost: 15
+        materialCost: NETHERITE_INGOT
+      '19':
+        material: TNT
+        amount: 8
+        cost: 4
+        materialCost: GOLD_INGOT
+      '20':
+        material: FLINT_AND_STEEL
+        amount: 1
+        cost: 1
+        materialCost: IRON_INGOT
+      '21':
+        material: WATER_BUCKET
+        amount: 1
+        cost: 6
+        materialCost: IRON_INGOT
+      '22':
+        material: ANVIL
+        amount: 4
+        cost: 16
+        materialCost: GOLD_INGOT
+      '23':
+        material: HORSE_SPAWN_EGG
+        amount: 1
+        cost: 8
+        materialCost: IRON_INGOT
+      '24':
+        material: FISHING_ROD
+        amount: 1
+        cost: 4
+        materialCost: GOLD_INGOT
+      '25':
+        material: ENDER_PEARL
+        amount: 1
+        cost: 8
+        materialCost: GOLD_INGOT
+      '30':
+        material: CHEST
+        amount: 1
+        cost: 2
+        materialCost: IRON_INGOT
+      '31':
+        material: ENDER_CHEST
+        amount: 1
+        cost: 8
+        materialCost: GOLD_INGOT
+      '32':
+        material: SHULKER_BOX
+        amount: 1
+        cost: 4
+        materialCost: NETHERITE_INGOT
+UpgradeShop:
+  allowed:
+    0: autoTotem
+    1: disableShield
+    2: chargeAnchor
+    3: picker
+    4: sweetHome
+    5: explosive
+  autoTotem:
+    name: Auto totem
+    item: TOTEM_OF_UNDYING
+    description:
+      0: 'Totem activates even'
+      1: ' if it is not in your'
+      2: ' main/off hand'
+    slot: 11
+    cost: 30
+    maxLvl: 1
+  disableShield:
+    name: Shield breaker
+    item: IRON_AXE
+    description:
+      0: 'Your weapons deal'
+      1: ' more durability damage'
+      2: ' to enemies shield'
+    slot: 12
+    cost: 20
+    maxLvl: 5
+    costHigher: 5
+  chargeAnchor:
+    name: Explosive pro
+    item: RESPAWN_ANCHOR
+    description:
+      0: '20% chance of'
+      1: ' respawn anchor being'
+      2: ' already charged when placed'
+    slot: 13
+    cost: 20
+    maxLvl: 1
+  picker:
+    name: Item picker
+    item: NETHERITE_INGOT
+    description:
+      0: 'When you have empty shulker box'
+      1: ' in your inventory'
+      2: ' while picking up resources,'
+      3: ' they will automatically appear'
+      4: ' in the shulker box'
+    slot: 21
+    cost: 33
+    maxLvl: 1
+  sweetHome:
+    name: Sweet home
+    item: ENDER_PEARL
+    description:
+      0: 'When your team anchor'
+      1: ' is broken you are'
+      2: ' teleported home'
+      3: ' and get turtle master'
+    slot: 22
+    cost: 25
+    maxLvl: 1
+  explosive:
+    name: Explosive Arrows
+    item: ARROW
+    description:
+      0: 'Arrows are explosive...'
+    slot: 14
+    cost: 20
+    maxLvl: 3
+    costHigher: 10

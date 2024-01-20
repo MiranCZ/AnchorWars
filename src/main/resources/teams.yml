@@ -1,0 +1,21 @@
+Teams:
+  activeTeams:
+    0: RED
+    1: BLUE
+    2: YELLOW
+  RED:
+    name: Red
+    color: §c
+    item: RED_WOOL
+    data:
+  BLUE:
+    name: Blue
+    color: §9
+    item: BLUE_WOOL
+    data:
+  YELLOW:
+    name: Yellow
+    color: §e
+    item: YELLOW_WOOL
+    data:
+

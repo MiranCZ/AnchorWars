@@ -1,0 +1,104 @@
+Generators:
+  allowedGens:
+    0: BRICK
+    1: IRON_INGOT
+    2: GOLD_INGOT
+    3: DIAMOND
+    4: NETHERITE_INGOT
+  data:
+    BRICK:
+      '0':
+        cost: 5
+        costMaterial: BRICK
+      '1':
+        time: 10
+        cost: 10
+        costMaterial: BRICK
+      '2':
+        time: 5
+        cost: 20
+        costMaterial: BRICK
+      '3':
+        time: 2
+        cost: 10
+        costMaterial: IRON_INGOT
+      '4':
+        time: 1
+        cost: 1
+        costMaterial: AIR
+    IRON_INGOT:
+      '0':
+        cost: 10
+        costMaterial: BRICK
+      '1':
+        time: 10
+        cost: 10
+        costMaterial: IRON_INGOT
+      '2':
+        time: 7
+        cost: 15
+        costMaterial: IRON_INGOT
+      '3':
+        time: 5
+        cost: 15
+        costMaterial: GOLD_INGOT
+      '4':
+        time: 3
+        cost: 1
+        costMaterial: AIR
+    GOLD_INGOT:
+      '0':
+        cost: 10
+        costMaterial: GOLD_INGOT
+      '1':
+        time: 30
+        cost: 15
+        costMaterial: GOLD_INGOT
+      '2':
+        time: 15
+        cost: 25
+        costMaterial: GOLD_INGOT
+      '3':
+        time: 10
+        cost: 1
+        costMaterial: AIR
+    DIAMOND:
+      '0':
+        cost: 10
+        costMaterial: DIAMOND
+      '1':
+        time: 20
+        cost: 15
+        costMaterial: DIAMOND
+      '2':
+        time: 10
+        cost: 20
+        costMaterial: DIAMOND
+      '3':
+        time: 5
+        cost: 1
+        costMaterial: NETHERITE_INGOT
+      '4':
+        time: 3
+        cost: 1
+        costMaterial: AIR
+    NETHERITE_INGOT:
+      '0':
+        cost: 5
+        costMaterial: NETHERITE_INGOT
+      '1':
+        time: 60
+        cost: 10
+        costMaterial: NETHERITE_INGOT
+      '2':
+        time: 30
+        cost: 15
+        costMaterial: NETHERITE_INGOT
+      '3':
+        time: 12
+        cost: 20
+        costMaterial: NETHERITE_INGOT
+      '4':
+        time: 5
+        cost: 1
+        costMaterial: AIR

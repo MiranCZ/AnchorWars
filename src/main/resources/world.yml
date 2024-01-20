@@ -1,0 +1,8 @@
+lobby:
+  lobby
+waitingLobby:
+  waitingLobby
+gameMap:
+  map
+default:
+  world

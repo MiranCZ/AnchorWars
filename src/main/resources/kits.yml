@@ -1,0 +1,34 @@
+Kits:
+  allowed:
+    0: fighter
+    1: armorer
+    2: repairer
+    3: better
+  fighter:
+    item: STONE_SWORD
+    description:
+      0: Quarenteed, to not remove
+      1: weapon with most damage
+      2: in your inventory.
+    slot: 0
+  armorer:
+    item: IRON_CHESTPLATE
+    description:
+      0: Armor you weare,
+      1: can not be removed.
+    slot: 1
+  repairer:
+    item: ANVIL
+    description:
+      0: All items in inventory
+      1: with durability less than
+      2: 50%, are fully repaired.
+    slot: 2
+  better:
+    item: GOLD_INGOT
+    description:
+      0: 60% chance of activating,
+      1: when activated 1/3 chance
+      2: of losing every item and
+      3: 2/3 of not losing any item.
+    slot: 3
