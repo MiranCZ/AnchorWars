@@ -1,7 +1,8 @@
 package me.miran.anchorwars.events;
 
 import me.miran.anchorwars.core.Main;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Horse;
@@ -19,12 +20,12 @@ public class Mix implements Listener {
 
     Main main;
 
-    public Mix (Main main) {
+    public Mix(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void onHorseSpawn (EntitySpawnEvent e) {
+    public void onHorseSpawn(EntitySpawnEvent e) {
         if (e.getEntityType() == EntityType.HORSE) {
             Horse horse = (Horse) e.getEntity();
             horse.setTamed(true);
@@ -33,62 +34,62 @@ public class Mix implements Listener {
     }
 
     @EventHandler
-    public void mobSpawn (CreatureSpawnEvent e) {
+    public void mobSpawn(CreatureSpawnEvent e) {
         if ((e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.DEFAULT)) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void playerJoined (PlayerJoinEvent e){
+    public void playerJoined(PlayerJoinEvent e) {
 
-            Player p = e.getPlayer();
+        Player p = e.getPlayer();
 
 
-            main.customMe.tpToLobby(p);
-            main.customMe.resetJoinSign();
+        main.customMe.tpToLobby(p);
+        main.customMe.resetJoinSign();
 
         //}
     }
 
     @EventHandler
-    public void craft (CraftItemEvent e){
+    public void craft(CraftItemEvent e) {
         e.setCancelled(true);
     }
 
 
     @EventHandler
-    public void villagerTransform (EntityTransformEvent e) {
+    public void villagerTransform(EntityTransformEvent e) {
         if (e.getEntity().getType() == EntityType.VILLAGER) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onEntityDamage (EntityDamageByEntityEvent e) {
-    if (e.getEntityType() == EntityType.VILLAGER) {
-        e.setCancelled(true);
-    } else if (e.getDamager() instanceof Firework) {
-        Firework fw = (Firework) e.getDamager();
-        if (fw.hasMetadata("nodamage")) {
+    public void onEntityDamage(EntityDamageByEntityEvent e) {
+        if (e.getEntityType() == EntityType.VILLAGER) {
             e.setCancelled(true);
+        } else if (e.getDamager() instanceof Firework) {
+            Firework fw = (Firework) e.getDamager();
+            if (fw.hasMetadata("nodamage")) {
+                e.setCancelled(true);
+            }
         }
     }
-}
 
-@EventHandler
+    @EventHandler
     public void food(FoodLevelChangeEvent e) {
-        if(e.getEntityType() == EntityType.PLAYER ) {
-            if(!main.map.isLoaded() || main.map.getWorld() != e.getEntity().getWorld()) {
+        if (e.getEntityType() == EntityType.PLAYER) {
+            if (!main.map.isLoaded() || main.map.getWorld() != e.getEntity().getWorld()) {
                 e.setCancelled(true);
             }
 
         }
-}
+    }
 
-@EventHandler
-    public void onPlayerTakeDamage (EntityDamageEvent e) {
-        if(e.getEntityType() == EntityType.PLAYER  ) {
+    @EventHandler
+    public void onPlayerTakeDamage(EntityDamageEvent e) {
+        if (e.getEntityType() == EntityType.PLAYER) {
             if (!main.map.isLoaded() || e.getEntity().getLocation().getWorld() != main.map.getWorld()) {
                 Player p = (Player) e.getEntity();
                 if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
@@ -114,25 +115,24 @@ public class Mix implements Listener {
 
             }
         }
-}
+    }
 
 
-
-@EventHandler
+    @EventHandler
     public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
         if (e.getMessage().contains("/reload") && e.getPlayer().isOp()) {
-    main.reload = true;
+            main.reload = true;
         }
-}
+    }
 
-@EventHandler
-    public void pDmg (EntityDamageEvent e) {
+    @EventHandler
+    public void pDmg(EntityDamageEvent e) {
         if (e.getEntityType() == EntityType.PLAYER) {
-          if (  main.pl.getP((Player) e.getEntity()).isProtected()) {
-              e.setCancelled(true);
-          }
+            if (main.pl.getP((Player) e.getEntity()).isProtected()) {
+                e.setCancelled(true);
+            }
         }
-}
+    }
 
 
 }

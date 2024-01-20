@@ -17,18 +17,16 @@ import java.util.HashMap;
 
 public class CustomMethods {
 
-    Main main;
-
-    public CustomMethods(Main main) {
-        this.main = main;
-    }
-
-    private HashMap<String, Integer> anchorLvl = new HashMap<>();
     private final HashMap<Material, ArrayList<ItemStack>> genPrizes = new HashMap<>();
     private final HashMap<Material, ArrayList<Integer>> resetTime = new HashMap<>();
     private final HashMap<Block, Material> genItems = new HashMap<>();
     private final HashMap<Block, Integer> genLvl = new HashMap<>();
     private final ArrayList<Player> lobbyPlayers = new ArrayList<>();
+    Main main;
+    private HashMap<String, Integer> anchorLvl = new HashMap<>();
+    public CustomMethods(Main main) {
+        this.main = main;
+    }
 
     public void reset() {
         anchorLvl = new HashMap<>();
@@ -112,10 +110,7 @@ public class CustomMethods {
     }
 
     public boolean isInLobby(Player p) {
-        if (lobbyPlayers.contains(p)) {
-            return true;
-        }
-        return false;
+        return lobbyPlayers.contains(p);
     }
 
 

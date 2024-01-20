@@ -51,15 +51,15 @@ Generators:
         cost: 10
         costMaterial: GOLD_INGOT
       '1':
-        time: 30
+        time: 20
         cost: 15
         costMaterial: GOLD_INGOT
       '2':
-        time: 15
-        cost: 25
-        costMaterial: GOLD_INGOT
-      '3':
-        time: 10
+        time: 13
+        cost: 10
+        costMaterial: DIAMOND
+      '4':
+        time: 3
         cost: 1
         costMaterial: AIR
     DIAMOND:

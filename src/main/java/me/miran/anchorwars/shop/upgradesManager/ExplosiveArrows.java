@@ -15,13 +15,13 @@ public class ExplosiveArrows implements Listener {
 
     Main main;
 
-    public ExplosiveArrows (Main main) {
+    public ExplosiveArrows(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void arrowHit (ProjectileHitEvent e) {
-        if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && !e.getEntity().hasMetadata("used")) {
+    public void arrowHit(ProjectileHitEvent e) {
+        if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && !e.getEntity().hasMetadata("used")) {
             Player p = (Player) e.getEntity().getShooter();
             if (main.pl.getP(p).hasUpgrade("explosive")) {
 
@@ -42,7 +42,7 @@ public class ExplosiveArrows implements Listener {
         }
     }
 
-    public void explode (Location loc, int power) {
+    public void explode(Location loc, int power) {
         World w = loc.getWorld();
         w.createExplosion(loc, (float) (power - 0.5), false, false);
     }

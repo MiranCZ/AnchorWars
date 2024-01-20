@@ -11,7 +11,7 @@ public class Leave implements CommandExecutor {
 
     Main main;
 
-    public Leave (Main main) {
+    public Leave(Main main) {
         this.main = main;
     }
 

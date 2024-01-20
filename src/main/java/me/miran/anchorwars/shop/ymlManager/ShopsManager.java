@@ -12,10 +12,10 @@ import java.util.logging.Level;
 
 public class ShopsManager {
 
-    private LoadShops loadShops = new LoadShops();
-    private SaveShops saveShops = new SaveShops();
+    private final LoadShops loadShops = new LoadShops();
+    private final SaveShops saveShops = new SaveShops();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -25,10 +25,9 @@ public class ShopsManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-            this.configFile = new File(this.main.getDataFolder(), "shops.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "shops.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("shops.yml");
@@ -39,7 +38,7 @@ public class ShopsManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -48,7 +47,7 @@ public class ShopsManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
@@ -58,8 +57,8 @@ public class ShopsManager {
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "shops.yml");
         }
         if (!this.configFile.exists()) {

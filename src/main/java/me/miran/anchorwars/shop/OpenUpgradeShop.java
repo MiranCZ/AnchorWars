@@ -13,18 +13,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class OpenUpgradeShop {
 
     Main main;
 
-    public OpenUpgradeShop (Main main) {
+    public OpenUpgradeShop(Main main) {
         this.main = main;
     }
 
-    public void openUpgradeShop (Player p) {
+    public void openUpgradeShop(Player p) {
 
-        Inventory upgradeShop = Bukkit.createInventory(null,36, "Upgrade Shop");
+        Inventory upgradeShop = Bukkit.createInventory(null, 36, "Upgrade Shop");
 
         int i = 0;
         boolean stop = false;
@@ -89,7 +90,6 @@ public class OpenUpgradeShop {
             upgradeShop.setItem(slot, stack);
 
 
-
             i++;
         }
 
@@ -98,13 +98,11 @@ public class OpenUpgradeShop {
         enchantM.setDisplayName("Enchant item");
 
 
-
         Double cost = main.customMe.getEnchantCost(p);
         if (cost > 0) {
-            enchantM.setLore(Arrays.asList(ChatColor.GRAY + "Enchant item in hand for " + cost.intValue() + " diamonds"));
+            enchantM.setLore(Collections.singletonList(ChatColor.GRAY + "Enchant item in hand for " + cost.intValue() + " diamonds"));
             enchant.setItemMeta(enchantM);
         }
-
 
 
         enchant.setItemMeta(enchantM);
@@ -114,8 +112,8 @@ public class OpenUpgradeShop {
 
         p.openInventory(upgradeShop);
         main.inv.add(p, upgradeShop);
-        }
-
-
     }
+
+
+}
 

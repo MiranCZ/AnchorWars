@@ -110,7 +110,7 @@ public final class Main extends JavaPlugin {
         registerCommands();
         registerEvents();
 
-       // gen.loadGens();
+        // gen.loadGens();
         this.saveDefaultConfig();//creates config.yml
     }
 

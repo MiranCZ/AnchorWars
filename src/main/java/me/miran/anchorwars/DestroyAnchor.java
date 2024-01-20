@@ -17,16 +17,14 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 
 
-
 public class DestroyAnchor implements Listener {
 
     Main main;
+    ArrayList<Player> damagedAnchor = new ArrayList<>();
 
     public DestroyAnchor(Main main) {
         this.main = main;
     }
-
-    ArrayList<Player> damagedAnchor = new ArrayList<>();
 
     @EventHandler
     public void clickOnAnchor(PlayerInteractEvent e) {
@@ -46,11 +44,10 @@ public class DestroyAnchor implements Listener {
                     Location protcLoc = b.getLocation();
 
 
+                    protcTeam = DataManager.teamByAnchor.get(main.loc.compileLoc(protcLoc, false)); //gets team owning attacked anchor
 
-                    protcTeam =  DataManager.teamByAnchor.get(main.loc.compileLoc( protcLoc, false)); //gets team owning attacked anchor
 
-
-                    if(protcTeam == null || atcTeam == null) {
+                    if (protcTeam == null || atcTeam == null) {
 
                         return;
                     }
@@ -63,9 +60,9 @@ public class DestroyAnchor implements Listener {
                     }
 
                     if (!atcTeam.equals("null") && !atcTeam.equals("spectator") && p.getGameMode() != GameMode.SPECTATOR) {
-                            if(main.customMe.getAnchorLevel(protcTeam) <= 0) {
-                                return;
-                            }
+                        if (main.customMe.getAnchorLevel(protcTeam) <= 0) {
+                            return;
+                        }
                         e.setCancelled(true);
                         World w = main.map.getWorld();
 
@@ -107,19 +104,19 @@ public class DestroyAnchor implements Listener {
                             }
                         }, 20L);
 
-                        for(Player teamP : main.customMe.getTeamPlayers(protcTeam)) {
-                            teamP.playSound(teamP.getLocation(), Sound.BLOCK_ANVIL_LAND, 5,1);
+                        for (Player teamP : main.customMe.getTeamPlayers(protcTeam)) {
+                            teamP.playSound(teamP.getLocation(), Sound.BLOCK_ANVIL_LAND, 5, 1);
                         }
 
                         if (main.customMe.getAnchorLevel(protcTeam) == 0) {
                             ChatColor color = ChatColor.valueOf(protcTeam);
 
-                            for ( Player player : Bukkit.getOnlinePlayers() ) {
+                            for (Player player : Bukkit.getOnlinePlayers()) {
                                 player.sendTitle(color + "" + ChatColor.BOLD + protcTeam + ChatColor.DARK_RED + " respawn anchor", ChatColor.GRAY + "was destroyed!", 7, 45, 20);
                                 player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 5, 1);
 
                             }
-                            for ( Player victim : main.customMe.getTeamPlayers(protcTeam) ) {
+                            for (Player victim : main.customMe.getTeamPlayers(protcTeam)) {
 
                                 if (main.pl.getP(p).hasUpgrade("sweetHome")) {
 
@@ -147,12 +144,11 @@ public class DestroyAnchor implements Listener {
     }
 
 
-
-    public void removeFromList (Player p) {
-damagedAnchor.remove(p);
+    public void removeFromList(Player p) {
+        damagedAnchor.remove(p);
     }
 
-    public void setCharges (Location loc, int charges) {
+    public void setCharges(Location loc, int charges) {
 
 
         Block b = loc.getBlock();

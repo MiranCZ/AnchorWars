@@ -24,16 +24,13 @@ import java.util.HashMap;
 
 public class GameSetup implements Listener {
 
+    private static final HashMap<Player, Integer> pages = new HashMap<>();
     Main main;
 
 
     public GameSetup(Main main) {
         this.main = main;
     }
-
-
-    private static final HashMap<Player, Integer> pages = new HashMap<>();
-
 
     @EventHandler
     public void breakBlock(BlockBreakEvent e) {

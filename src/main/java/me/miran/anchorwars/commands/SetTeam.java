@@ -38,22 +38,22 @@ public class SetTeam implements CommandExecutor {
                 }
 
             } else if (args.length == 2) {
-Player p = Bukkit.getPlayer(args[0]);
+                Player p = Bukkit.getPlayer(args[0]);
 
 
                 if (p == null) {
-    sender.sendMessage(ChatColor.RED + "Player named " + args[0] + " is not online!");
-    return false;
-}
+                    sender.sendMessage(ChatColor.RED + "Player named " + args[0] + " is not online!");
+                    return false;
+                }
                 if (validTeam(args[1])) {
-main.pl.getP(p).setTeam(args[1]);
+                    main.pl.getP(p).setTeam(args[1]);
                     main.scoreBoard.addScoreBoard(p);
                     p.setGameMode(GameMode.SURVIVAL);
                     p.setHealth(0);
                     p.sendMessage(ChatColor.GREEN + "Your team was changed to " + args[1]);
                 }
 
-return false;
+                return false;
             } else {
                 sender.sendMessage(ChatColor.RED + "Use /setTeam <name> team");
                 return false;
@@ -65,11 +65,8 @@ return false;
         return false;
     }
 
-public boolean validTeam (String team) {
-        if (team.equals("RED") || team.equals("BLUE") || team.equals("YELLOW")) {
-            return true;
-        }
-        return false;
-}
+    public boolean validTeam(String team) {
+        return team.equals("RED") || team.equals("BLUE") || team.equals("YELLOW");
+    }
 
 }

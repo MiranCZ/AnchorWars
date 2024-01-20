@@ -17,16 +17,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.awt.Color;
-import java.util.spi.LocaleServiceProvider;
 
 public class YBorder implements CommandExecutor, Listener {
 
     Main main;
 
-    public YBorder (Main main) {
+    public YBorder(Main main) {
         this.main = main;
     }
-
 
 
     @Override
@@ -44,26 +42,25 @@ public class YBorder implements CommandExecutor, Listener {
                 sender.sendMessage(ChatColor.RED + args[0] + " is not number! Use: /.setYBorder <number>");
             }
         } else {
-            sender.sendMessage(ChatColor.RED  + "You need to be an server operator to execute this command!");
+            sender.sendMessage(ChatColor.RED + "You need to be an server operator to execute this command!");
         }
         return false;
     }
 
 
-
     @EventHandler
-    public void playerCrossBorder (PlayerMoveEvent e) {
+    public void playerCrossBorder(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (p.getLocation().getY() <= main.yBorder) {
-            if (p.getInventory().getItemInMainHand().getType() == Material.TOTEM_OF_UNDYING || p.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING ) {
+            if (p.getInventory().getItemInMainHand().getType() == Material.TOTEM_OF_UNDYING || p.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING) {
 
 
-               Location loc = DataManager.spawns.get(main.pl.getP(p).getTeam());
+                Location loc = DataManager.spawns.get(main.pl.getP(p).getTeam());
 
-                if(loc == null) {
+                if (loc == null) {
                     loc = main.worldBCenter;
                 }
-                
+
                 //teleport player 100 blocks up
                 p.teleport(new Location(p.getWorld(), loc.getX(), loc.getY() + 10, loc.getZ()), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 //pop totem
@@ -75,15 +72,14 @@ public class YBorder implements CommandExecutor, Listener {
                         addSLow(p);
                     }
                 }, 1L);
-            }else if (main.pl.getP(p).hasUpgrade("autoTotem")) {
+            } else if (main.pl.getP(p).hasUpgrade("autoTotem")) {
                 if (p.getInventory().containsAtLeast(new ItemStack(Material.TOTEM_OF_UNDYING), 1)) {
 
-                   Location loc = DataManager.spawns.get(main.pl.getP(p).getTeam());
+                    Location loc = DataManager.spawns.get(main.pl.getP(p).getTeam());
 
-                    if(loc == null) {
+                    if (loc == null) {
                         loc = main.worldBCenter;
                     }
-
 
 
                     p.getActivePotionEffects().clear();
@@ -103,25 +99,25 @@ public class YBorder implements CommandExecutor, Listener {
                     }, 1L);
                 }
             } else {
-                if(main.gameStart && main.map.isLoaded()) {
+                if (main.gameStart && main.map.isLoaded()) {
 
-                 if(p.getWorld() == main.map.getWorld()) {
+                    if (p.getWorld() == main.map.getWorld()) {
 
-                     EntityDamageEvent Void = new EntityDamageEvent(p, EntityDamageEvent.DamageCause.VOID, 1);
-                     p.setLastDamageCause(Void);
-                     p.setHealth(1);
-                     p.getActivePotionEffects().clear();
-                     p.damage(100);
+                        EntityDamageEvent Void = new EntityDamageEvent(p, EntityDamageEvent.DamageCause.VOID, 1);
+                        p.setLastDamageCause(Void);
+                        p.setHealth(1);
+                        p.getActivePotionEffects().clear();
+                        p.damage(100);
 
-                 }
+                    }
                 }
 
-                }
             }
-
         }
 
-    public void addSLow (Player p) {
+    }
+
+    public void addSLow(Player p) {
         p.removePotionEffect(PotionEffectType.SLOW_FALLING);
         p.addPotionEffect((new PotionEffect(PotionEffectType.SLOW_FALLING, 5, 4)));
     }

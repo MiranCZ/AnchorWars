@@ -12,10 +12,10 @@ import java.util.logging.Level;
 
 public class GensManager {
 
-    private LoadGens loadGens = new LoadGens();
-    private SaveGens saveGens = new SaveGens();
+    private final LoadGens loadGens = new LoadGens();
+    private final SaveGens saveGens = new SaveGens();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -25,10 +25,9 @@ public class GensManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-            this.configFile = new File(this.main.getDataFolder(), "gens.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "gens.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("gens.yml");
@@ -39,7 +38,7 @@ public class GensManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -48,7 +47,7 @@ public class GensManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
@@ -58,8 +57,8 @@ public class GensManager {
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "gens.yml");
         }
         if (!this.configFile.exists()) {

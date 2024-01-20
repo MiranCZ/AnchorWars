@@ -17,7 +17,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 public class StartGame {
 
     Main main;
-
+    int countDown;
+    private int taskId;
 
     public StartGame(Main main) {
         this.main = main;
@@ -132,9 +133,6 @@ public class StartGame {
 
 
     }
-
-    int countDown;
-    private int taskId;
 
     public void countToStart() {
         countDown = 10;

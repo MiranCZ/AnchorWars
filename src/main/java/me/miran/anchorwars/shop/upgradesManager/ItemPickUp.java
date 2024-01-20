@@ -21,10 +21,10 @@ public class ItemPickUp implements Listener {
     }
 
     @EventHandler
-    public void playerPick (EntityPickupItemEvent e) {
+    public void playerPick(EntityPickupItemEvent e) {
         if (e.getEntityType() == EntityType.PLAYER) {
 
-            if(main.gameStart) {
+            if (main.gameStart) {
 
 
                 Player p = (Player) e.getEntity();
@@ -43,7 +43,7 @@ public class ItemPickUp implements Listener {
 
                         int i = 0;
 
-                        for ( ItemStack stack : items ) {
+                        for (ItemStack stack : items) {
                             i++;
                             if (stack == null) {
                                 continue;
@@ -60,7 +60,7 @@ public class ItemPickUp implements Listener {
 
                                 ShulkerBox shulker = (ShulkerBox) bsm.getBlockState();
 
-                                for ( ItemStack items1 : shulker.getInventory().getContents() ) {
+                                for (ItemStack items1 : shulker.getInventory().getContents()) {
                                     if (items1 == null) {
                                         space += 64;
                                         continue;

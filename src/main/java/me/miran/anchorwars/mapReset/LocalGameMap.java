@@ -7,14 +7,14 @@ import org.bukkit.WorldCreator;
 import java.io.File;
 import java.io.IOException;
 
-public class LocalGameMap implements GameMap{
+public class LocalGameMap implements GameMap {
 
     private final File sourceWorldFolder;
     private File activeWorldFolder;
 
     private World bukkitWorld;
 
-    public LocalGameMap (File worldFolder, String worldName, boolean loadOnInit) {
+    public LocalGameMap(File worldFolder, String worldName, boolean loadOnInit) {
         this.sourceWorldFolder = new File(
                 worldFolder,
                 worldName
@@ -23,7 +23,7 @@ public class LocalGameMap implements GameMap{
         if (loadOnInit) load();
     }
 
-    public  boolean load() {
+    public boolean load() {
         if (isLoaded()) return true;
 
         this.activeWorldFolder = new File(
@@ -31,10 +31,10 @@ public class LocalGameMap implements GameMap{
                 sourceWorldFolder.getName() + "_active_" + System.currentTimeMillis()
         );
 
-                try {
-           if ( !FileUtil.copy(sourceWorldFolder, activeWorldFolder)) {
-               return false;
-           }
+        try {
+            if (!FileUtil.copy(sourceWorldFolder, activeWorldFolder)) {
+                return false;
+            }
         } catch (IOException e) {
             Bukkit.getLogger().severe("Failed to load GameMap from source folder " + sourceWorldFolder.getName());
             e.printStackTrace();
@@ -50,25 +50,26 @@ public class LocalGameMap implements GameMap{
     }
 
     public void unload() {
-if (bukkitWorld != null) Bukkit.unloadWorld(bukkitWorld, false);
-if (activeWorldFolder != null) me.miran.anchorwars.mapReset.FileUtil.delete(activeWorldFolder);
+        if (bukkitWorld != null) Bukkit.unloadWorld(bukkitWorld, false);
+        if (activeWorldFolder != null) me.miran.anchorwars.mapReset.FileUtil.delete(activeWorldFolder);
 
 
-bukkitWorld = null;
-activeWorldFolder = null;
+        bukkitWorld = null;
+        activeWorldFolder = null;
     }
 
     public boolean restoreFromSource() {
-unload();
-return load();
+        unload();
+        return load();
     }
 
-public boolean isLoaded() {return getWorld() != null;}
+    public boolean isLoaded() {
+        return getWorld() != null;
+    }
 
-    public World getWorld (){return bukkitWorld;}
-
-
-
+    public World getWorld() {
+        return bukkitWorld;
+    }
 
 
 }

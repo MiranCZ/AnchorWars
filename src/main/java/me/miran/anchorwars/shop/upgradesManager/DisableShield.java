@@ -17,13 +17,12 @@ public class DisableShield implements Listener {
 
     Main main;
 
-    public DisableShield (Main main) {
+    public DisableShield(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void playerBlock (EntityDamageByEntityEvent e) {
-
+    public void playerBlock(EntityDamageByEntityEvent e) {
 
 
         if (main.gameStart) {
@@ -32,65 +31,62 @@ public class DisableShield implements Listener {
                 Player k = (Player) e.getDamager();
                 if (p.isBlocking()) {
                     if (main.pl.getP(k).hasUpgrade("disableShield")) {
-                    Random r = new Random();
+                        Random r = new Random();
 
-                    ItemStack shield;
-                    if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
-                        shield = p.getInventory().getItemInMainHand();
+                        ItemStack shield;
+                        if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
+                            shield = p.getInventory().getItemInMainHand();
 
-                    } else if (p.getInventory().getItemInOffHand().getType() == Material.SHIELD) {
-                        shield = p.getInventory().getItemInOffHand();
+                        } else if (p.getInventory().getItemInOffHand().getType() == Material.SHIELD) {
+                            shield = p.getInventory().getItemInOffHand();
 
-                    } else {
-                        return;
-                    }
+                        } else {
+                            return;
+                        }
 
-                    ItemMeta shieldM = shield.getItemMeta();
+                        ItemMeta shieldM = shield.getItemMeta();
 
-                       int level = main.pl.getP(k).getUpgrade("disableShield");
-
-
-
-                    int damage = (int) Math.round(e.getDamage() * (level + Math.random()));
+                        int level = main.pl.getP(k).getUpgrade("disableShield");
 
 
-
-                    org.bukkit.inventory.meta.Damageable damageable = (org.bukkit.inventory.meta.Damageable) shieldM;
-
-                    int maxDurability = Material.SHIELD.getMaxDurability();
-
-                    short getDurability = (short) ((short) maxDurability - damageable.getDamage());
-
-                    if(getDurability < 0) {
-                        getDurability = (short) maxDurability;
-                    }
-
-                    int i;
-                    for (i = damage; i > 0; i--) {
-                        int durability = shieldM.getEnchantLevel(Enchantment.DURABILITY);
-                        int chance = (100/(durability+1));//how unbreaking is calculated according to mc wiki
-                        int breaking = r.nextInt(100) + 1;
+                        int damage = (int) Math.round(e.getDamage() * (level + Math.random()));
 
 
+                        org.bukkit.inventory.meta.Damageable damageable = (org.bukkit.inventory.meta.Damageable) shieldM;
 
-                        if(breaking < chance) {
-                            getDurability--;
+                        int maxDurability = Material.SHIELD.getMaxDurability();
+
+                        short getDurability = (short) ((short) maxDurability - damageable.getDamage());
+
+                        if (getDurability < 0) {
+                            getDurability = (short) maxDurability;
+                        }
+
+                        int i;
+                        for (i = damage; i > 0; i--) {
+                            int durability = shieldM.getEnchantLevel(Enchantment.DURABILITY);
+                            int chance = (100 / (durability + 1));//how unbreaking is calculated according to mc wiki
+                            int breaking = r.nextInt(100) + 1;
+
+
+                            if (breaking < chance) {
+                                getDurability--;
+
+                            }
+                        }
+                        shield.setDurability((short) (maxDurability - getDurability));
+                        if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
+
+                            p.getInventory().setItemInMainHand(shield);
+
+                        } else { //off hand
+                            p.getInventory().setItemInOffHand(shield);
 
                         }
-                    }
-                    shield.setDurability((short) ( maxDurability - getDurability));
-                    if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
 
-                        p.getInventory().setItemInMainHand(shield);
-
-                    } else  { //off hand
-                        p.getInventory().setItemInOffHand(shield);
-
-                    }
-
-                         }
                     }
                 }
             }
         }
+    }
 }

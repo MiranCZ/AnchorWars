@@ -1,7 +1,10 @@
 package me.miran.anchorwars.shop;
 
 import me.miran.anchorwars.core.Main;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -14,10 +17,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.*;
 
-public class ShopManager implements  Listener {
+public class ShopManager implements Listener {
 
     Main main;
 
@@ -33,8 +36,8 @@ public class ShopManager implements  Listener {
             Villager v = (Villager) e.getInventory().getHolder();
 
             if (v.getProfession() == Villager.Profession.WEAPONSMITH) {
-               e.setCancelled(true);
-               this.openSections(p);
+                e.setCancelled(true);
+                this.openSections(p);
 
             } else if (v.getProfession() == Villager.Profession.TOOLSMITH) {
                 e.setCancelled(true);
@@ -44,36 +47,34 @@ public class ShopManager implements  Listener {
         }
     }
 
-    public void openSections (Player p) {
-        Inventory inv = Bukkit.createInventory(p,main.shops.getConfig().getInt("Shop" + ".main" + ".size" ), main.shops.getConfig().getString("Shop" + ".main" + ".name" ));
+    public void openSections(Player p) {
+        Inventory inv = Bukkit.createInventory(p, main.shops.getConfig().getInt("Shop" + ".main" + ".size"), main.shops.getConfig().getString("Shop" + ".main" + ".name"));
 
         boolean isNull = false;
-        int i =0;
+        int i = 0;
         while (!isNull) {
             String id = "." + i;
-            String section = "." +  main.shops.getConfig().getString("Shop" + ".main" + ".loadSections"  + id);
+            String section = "." + main.shops.getConfig().getString("Shop" + ".main" + ".loadSections" + id);
 
 
+            String sM = main.shops.getConfig().getString("Shop" + section + ".representativeItem");
 
-            String sM = main.shops.getConfig().getString("Shop" + section + ".representativeItem" );
 
-
-            if ( sM == null) {
+            if (sM == null) {
                 isNull = true;
                 continue;
             }
 
 
-            ItemStack itemStack = new ItemStack(Material.valueOf( sM));
+            ItemStack itemStack = new ItemStack(Material.valueOf(sM));
 
             ItemMeta itemMeta = itemStack.getItemMeta();
 
-            itemMeta.setDisplayName(main.shops.getConfig().getString("Shop" + section + ".name" ));
+            itemMeta.setDisplayName(main.shops.getConfig().getString("Shop" + section + ".name"));
 
             itemStack.setItemMeta(itemMeta);
 
-            inv.setItem(main.shops.getConfig().getInt("Shop" + section + ".slotInMain" ), itemStack);
-
+            inv.setItem(main.shops.getConfig().getInt("Shop" + section + ".slotInMain"), itemStack);
 
 
             i++;
@@ -87,11 +88,11 @@ public class ShopManager implements  Listener {
         Player p = (Player) e.getWhoClicked();
         int slot = e.getSlot();
 
-        if (e.getView().getTitle().equals("Upgrade Shop") &&main.inv.isInv(p, e.getClickedInventory())) {
+        if (e.getView().getTitle().equals("Upgrade Shop") && main.inv.isInv(p, e.getClickedInventory())) {
             e.setCancelled(true);
 
 
-            if(slot == 34) {
+            if (slot == 34) {
 
                 e.setCancelled(true);
                 this.enchant(p);
@@ -100,17 +101,17 @@ public class ShopManager implements  Listener {
 
             boolean stop = false;
             int i = 0;
-            while(!stop) {
+            while (!stop) {
                 String name = main.shops.getConfig().getString("UpgradeShop.allowed." + i);
 
-                if(name == null) {
+                if (name == null) {
                     stop = true;
                     continue;
                 }
 
                 int itemSLot = main.shops.getConfig().getInt("UpgradeShop." + name + ".slot");
 
-                if(itemSLot == slot) {
+                if (itemSLot == slot) {
                     int costNum = main.shops.getConfig().getInt("UpgradeShop." + name + ".cost");
                     if (main.shops.getConfig().getInt("UpgradeShop." + name + ".maxLvl") > 1) {
 
@@ -133,18 +134,17 @@ public class ShopManager implements  Listener {
 
                 i++;
             }
-            }
-
-
         }
 
+
+    }
 
 
     public void enchant(Player p) {
         ArrayList<Enchantment> enchantments = new ArrayList<>();
         Double cost = main.customMe.getEnchantCost(p);
 
-        if(cost > 0) {
+        if (cost > 0) {
 
 
             ItemMeta swordM = p.getInventory().getItemInMainHand().getItemMeta();
@@ -168,8 +168,8 @@ public class ShopManager implements  Listener {
                 double biggerCost = enchantments.size() + 0.5;
 
                 int x = r.nextInt(3) + 1;
-                int y =(int) (Math.round(x*((cost* biggerCost)/100)));
-                x = r.nextInt(x+ y);
+                int y = (int) (Math.round(x * ((cost * biggerCost) / 100)));
+                x = r.nextInt(x + y);
 
 
                 int maxTimes = 3;
@@ -186,58 +186,57 @@ public class ShopManager implements  Listener {
 
                 HashMap<Enchantment, Integer> enchantedWith = new HashMap<>();
 
-for (times = x; times > 0; times--) {
+                for (times = x; times > 0; times--) {
 
-    int i = r.nextInt(enchantments.size());
-    Enchantment e = enchantments.get(i);
-
-
-
-while (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) >= e.getMaxLevel()) {
-enchantments.remove(e);
-
-    for(Enchantment enchantment : p.getInventory().getItemInMainHand().getItemMeta().getEnchants().keySet()) {
-        if(enchantment.conflictsWith(e)) {
-            enchantments.remove(e);
-        }
-    }
-
-    if(enchantments.size() == 0) {
-        p.sendMessage(ChatColor.RED + "This item can not be enchanted any more!");
-        return;
-    }
-    i = r.nextInt(enchantments.size());
-    e = enchantments.get(i);
-
-}
-
-    int level = r.nextInt(e.getMaxLevel());
-    if (level == 0) {
-        level = 1;
-    }
-
-    if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) + level > e.getMaxLevel()) {
-        level = e.getMaxLevel();
-    }else if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) + level <= e.getMaxLevel()) {
-        level = level + p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e);
-        p.getInventory().getItemInMainHand().getItemMeta().removeEnchant(e);
-
-    }
-
-    if (level > e.getMaxLevel()) {
-        level = e.getMaxLevel();
-    }
-    swordM.addEnchant(e, level, true);
+                    int i = r.nextInt(enchantments.size());
+                    Enchantment e = enchantments.get(i);
 
 
-    p.getInventory().getItemInMainHand().setItemMeta(swordM);
-    enchantedWith.put(e, level);
-    }
-                for ( Map.Entry<Enchantment, Integer> entry : enchantedWith.entrySet()) {
+                    while (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) >= e.getMaxLevel()) {
+                        enchantments.remove(e);
+
+                        for (Enchantment enchantment : p.getInventory().getItemInMainHand().getItemMeta().getEnchants().keySet()) {
+                            if (enchantment.conflictsWith(e)) {
+                                enchantments.remove(e);
+                            }
+                        }
+
+                        if (enchantments.size() == 0) {
+                            p.sendMessage(ChatColor.RED + "This item can not be enchanted any more!");
+                            return;
+                        }
+                        i = r.nextInt(enchantments.size());
+                        e = enchantments.get(i);
+
+                    }
+
+                    int level = r.nextInt(e.getMaxLevel());
+                    if (level == 0) {
+                        level = 1;
+                    }
+
+                    if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) + level > e.getMaxLevel()) {
+                        level = e.getMaxLevel();
+                    } else if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e) + level <= e.getMaxLevel()) {
+                        level = level + p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(e);
+                        p.getInventory().getItemInMainHand().getItemMeta().removeEnchant(e);
+
+                    }
+
+                    if (level > e.getMaxLevel()) {
+                        level = e.getMaxLevel();
+                    }
+                    swordM.addEnchant(e, level, true);
+
+
+                    p.getInventory().getItemInMainHand().setItemMeta(swordM);
+                    enchantedWith.put(e, level);
+                }
+                for (Map.Entry<Enchantment, Integer> entry : enchantedWith.entrySet()) {
                     Enchantment e = entry.getKey();
                     int level = entry.getValue();
                     String lvl = getRomanSymbol(level);
-                    if(level == 1 && e.getMaxLevel() == 1) {
+                    if (level == 1 && e.getMaxLevel() == 1) {
                         lvl = "";
                     }
 
@@ -246,20 +245,20 @@ enchantments.remove(e);
 
                 }
 
-    p.getInventory().removeItem(costItemStack);
-    p.playSound(p.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 5, 1);
+                p.getInventory().removeItem(costItemStack);
+                p.playSound(p.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 5, 1);
                 double newCost = main.customMe.getEnchantCost(p);
 
                 ItemStack item = new ItemStack(Material.ENCHANTING_TABLE);
                 ItemMeta itemM = item.getItemMeta();
 
-                itemM.setLore(Arrays.asList(ChatColor.GRAY + "Enchant item in hand for " + (int) newCost + " diamonds"));
+                itemM.setLore(Collections.singletonList(ChatColor.GRAY + "Enchant item in hand for " + (int) newCost + " diamonds"));
                 item.setItemMeta(itemM);
                 p.getOpenInventory().setItem(34, item);
-    //p.closeInventory();
+                //p.closeInventory();
 
-                } else {
-                    int has = 0;
+            } else {
+                int has = 0;
                 for (int i = 0; i < 36; i++) {
                     ItemStack slot = p.getInventory().getItem(i);
                     if (slot == null || !slot.isSimilar(new ItemStack(Material.DIAMOND)))
@@ -267,21 +266,21 @@ enchantments.remove(e);
                     has += slot.getAmount();
                 }
                 Double cost1 = Math.floor(cost - has);
-                    p.sendMessage(ChatColor.RED + "You need " +  cost1.intValue() + " more diamonds");
+                p.sendMessage(ChatColor.RED + "You need " + cost1.intValue() + " more diamonds");
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
 
-                }
-            } else {
-                p.sendMessage(ChatColor.RED + "This item can not be enchanted");
-                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
             }
+        } else {
+            p.sendMessage(ChatColor.RED + "This item can not be enchanted");
+            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
         }
+    }
 
-        public String getRomanSymbol (int number) {
-        if(number == 1) {
+    public String getRomanSymbol(int number) {
+        if (number == 1) {
             return "I";
         }
-        if(number == 2) {
+        if (number == 2) {
             return "II";
         }
         if (number == 3) {
@@ -295,9 +294,9 @@ enchantments.remove(e);
         }
 
         return number + "";
-        }
+    }
 
-        public ArrayList<Enchantment> getEnchantments (Material material) {
+    public ArrayList<Enchantment> getEnchantments(Material material) {
         String handI = material.toString().toLowerCase();
         ArrayList<Enchantment> enchantments = new ArrayList<>();
         if (handI.contains("sword")) {
@@ -347,7 +346,7 @@ enchantments.remove(e);
         return enchantments;
     }
 
-    }
+}
 
 
 

@@ -11,17 +11,17 @@ import java.util.HashMap;
 public class InventoryManager implements Listener {
     private final HashMap<Player, Inventory> invents = new HashMap<>();
 
-    public void add (Player p, Inventory inv) {
-        invents.put(p,inv);
+    public void add(Player p, Inventory inv) {
+        invents.put(p, inv);
     }
 
-    public void remove (Player p) {
+    public void remove(Player p) {
         if (invents.get(p) != null) {
             invents.remove(p);
         }
     }
 
-    public boolean isInv (Player p, Inventory inv) {
+    public boolean isInv(Player p, Inventory inv) {
         if (invents.get(p) != null) {
             return invents.get(p).toString().equals(inv.toString());
         }
@@ -29,7 +29,7 @@ public class InventoryManager implements Listener {
     }
 
     @EventHandler
-    private void invClose (InventoryCloseEvent e) {
+    private void invClose(InventoryCloseEvent e) {
         if (invents.get(e.getPlayer()) != null) {
             invents.remove(e.getPlayer());
 

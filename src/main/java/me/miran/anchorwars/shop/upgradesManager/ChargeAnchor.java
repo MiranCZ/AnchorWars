@@ -14,12 +14,12 @@ public class ChargeAnchor implements Listener {
 
     Main main;
 
-    public ChargeAnchor (Main main) {
+    public ChargeAnchor(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void blockPlace (BlockPlaceEvent e) {
+    public void blockPlace(BlockPlaceEvent e) {
         if (e.getBlock().getType() == Material.RESPAWN_ANCHOR) {
             Player p = e.getPlayer();
             if (main.pl.getP(p).hasUpgrade("chargeAnchor")) {
@@ -29,11 +29,11 @@ public class ChargeAnchor implements Listener {
 
                     RespawnAnchor anchor = (RespawnAnchor) e.getBlock().getBlockData();
                     anchor.setCharges(4);
-                     e.getBlock().getWorld().getBlockAt(e.getBlock().getLocation()).setType(Material.RESPAWN_ANCHOR);
+                    e.getBlock().getWorld().getBlockAt(e.getBlock().getLocation()).setType(Material.RESPAWN_ANCHOR);
                     e.getBlock().getWorld().getBlockAt(e.getBlock().getLocation()).setBlockData(anchor);
 
 
-               }
+                }
             }
         }
     }

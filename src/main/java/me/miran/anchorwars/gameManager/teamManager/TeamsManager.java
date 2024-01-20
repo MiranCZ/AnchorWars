@@ -12,10 +12,10 @@ import java.util.logging.Level;
 
 public class TeamsManager {
 
-    private LoadTeams loadTeams = new LoadTeams();
-    private SaveTeams saveTeams = new SaveTeams();
+    private final LoadTeams loadTeams = new LoadTeams();
+    private final SaveTeams saveTeams = new SaveTeams();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -25,10 +25,9 @@ public class TeamsManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-            this.configFile = new File(this.main.getDataFolder(), "teams.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "teams.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("teams.yml");
@@ -39,7 +38,7 @@ public class TeamsManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -48,7 +47,7 @@ public class TeamsManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
@@ -58,8 +57,8 @@ public class TeamsManager {
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "teams.yml");
         }
         if (!this.configFile.exists()) {

@@ -1,6 +1,5 @@
 package me.miran.anchorwars.gameManager.kitManager;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -16,90 +15,93 @@ public class Kits {
 
     private static final HashMap<Player, String> kits = new HashMap<>();
 
-    public void setKit (Player p, String kit) {
-kits.put(p, kit);
+    public void setKit(Player p, String kit) {
+        kits.put(p, kit);
     }
 
-    private String getKit (Player p) {
+    private String getKit(Player p) {
         return kits.get(p);
     }
 
-    public void applyKit (Player p) {
-    String kit = getKit(p).toLowerCase();
+    public void applyKit(Player p) {
+        String kit = getKit(p).toLowerCase();
 
-    switch (kit) {
-        case "fighter" : {
-ItemStack[] inv = p.getInventory().getContents();
+        switch (kit) {
+            case "fighter": {
+                ItemStack[] inv = p.getInventory().getContents();
 
-int mostDmg = 0;
-ItemStack stack = null;
+                int mostDmg = 0;
+                ItemStack stack = null;
 
-int i = 0;
+                int i = 0;
 
-for(ItemStack item : inv) {
-    if(item == null) {
-        i++;
-        continue;
-    }
+                for (ItemStack item : inv) {
+                    if (item == null) {
+                        i++;
+                        continue;
+                    }
 
-    int dmg = getItemDamageValue(item.getType(), item.getEnchantmentLevel(Enchantment.DAMAGE_ALL));
-  if (dmg > mostDmg) {
-      mostDmg = dmg;
-      stack = item;
-  }
-  i++;
-}
-            ArrayList<ItemStack> item = new ArrayList<>();
-item.add(stack);
-deleteItems(p, item);
-
-            break;
-        } case "armorer" :{
-ItemStack[] armor = p.getInventory().getArmorContents();
-p.getInventory().setArmorContents(null);
-deleteItems(p, new ArrayList<>());
-p.getInventory().setArmorContents(armor);
-            break;
-        } case "repairer" :{
-
-            deleteItems(p, new ArrayList<>());
-            for (ItemStack stack : p.getInventory().getContents()) {
-                if (stack == null) {
-                    continue;
+                    int dmg = getItemDamageValue(item.getType(), item.getEnchantmentLevel(Enchantment.DAMAGE_ALL));
+                    if (dmg > mostDmg) {
+                        mostDmg = dmg;
+                        stack = item;
+                    }
+                    i++;
                 }
-                if (!Enchantment.DURABILITY.canEnchantItem(stack)) {
-                    continue;
-                }
-                Damageable damageable = (Damageable) stack.getItemMeta();
+                ArrayList<ItemStack> item = new ArrayList<>();
+                item.add(stack);
+                deleteItems(p, item);
 
-                int maxDur = stack.getType().getMaxDurability();
-                int dur = damageable.getDamage();
-
-
-                if (maxDur/2 < dur) {
-
-                    damageable.setDamage(0);
-
-                    stack.setItemMeta((ItemMeta) damageable);
-                }
-
+                break;
             }
+            case "armorer": {
+                ItemStack[] armor = p.getInventory().getArmorContents();
+                p.getInventory().setArmorContents(null);
+                deleteItems(p, new ArrayList<>());
+                p.getInventory().setArmorContents(armor);
+                break;
+            }
+            case "repairer": {
 
-            break;
-        } case "better" :{
-            Random r = new Random();
-            int i = r.nextInt(3);
-            if (i < 2) {
-                i = r.nextInt(3);
+                deleteItems(p, new ArrayList<>());
+                for (ItemStack stack : p.getInventory().getContents()) {
+                    if (stack == null) {
+                        continue;
+                    }
+                    if (!Enchantment.DURABILITY.canEnchantItem(stack)) {
+                        continue;
+                    }
+                    Damageable damageable = (Damageable) stack.getItemMeta();
 
-                if(i == 0) {
-                    p.getInventory().clear();
+                    int maxDur = stack.getType().getMaxDurability();
+                    int dur = damageable.getDamage();
+
+
+                    if (maxDur / 2 < dur) {
+
+                        damageable.setDamage(0);
+
+                        stack.setItemMeta((ItemMeta) damageable);
+                    }
+
                 }
 
+                break;
             }
-            break;
+            case "better": {
+                Random r = new Random();
+                int i = r.nextInt(3);
+                if (i < 2) {
+                    i = r.nextInt(3);
+
+                    if (i == 0) {
+                        p.getInventory().clear();
+                    }
+
+                }
+                break;
+            }
         }
-    }
     }
 
 
@@ -107,16 +109,15 @@ p.getInventory().setArmorContents(armor);
         ItemStack[] inv = p.getInventory().getContents();
 
         p.getInventory().clear();
-Random rand = new Random();
-int r;
-int i;
+        Random rand = new Random();
+        int r;
+        int i;
         for (i = 0; i < inv.length; i++) {
-
 
 
             r = rand.nextInt(2);
 
-            if (r== 1 || keep.contains(inv[i])) {
+            if (r == 1 || keep.contains(inv[i])) {
                 keep.remove(inv[i]);
                 p.getInventory().setItem(i, inv[i]);
             }
@@ -128,7 +129,7 @@ int i;
     private int getItemDamageValue(Material item, int sharpness) {
         int damageValue = 0;
         if (item != null) {
-             if (item == Material.WOODEN_SWORD || item == Material.GOLDEN_SWORD) {
+            if (item == Material.WOODEN_SWORD || item == Material.GOLDEN_SWORD) {
                 damageValue = 4;
             } else if (item == Material.STONE_SWORD) {
                 damageValue = 5;
@@ -136,9 +137,9 @@ int i;
                 damageValue = 6;
             } else if (item == Material.DIAMOND_SWORD) {
                 damageValue = 7;
-            }  else if (item == Material.NETHERITE_SWORD) {
+            } else if (item == Material.NETHERITE_SWORD) {
                 damageValue = 8;
-            } else if (item == Material.WOODEN_AXE ||item == Material.GOLDEN_AXE) {
+            } else if (item == Material.WOODEN_AXE || item == Material.GOLDEN_AXE) {
                 damageValue = 7;
             } else if (item == Material.STONE_AXE || item == Material.IRON_AXE || item == Material.DIAMOND_AXE) {
                 damageValue = 9;

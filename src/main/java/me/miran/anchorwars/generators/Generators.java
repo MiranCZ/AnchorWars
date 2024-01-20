@@ -18,10 +18,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Generators implements Listener {
 
@@ -42,8 +39,8 @@ public class Generators implements Listener {
         this.main = main;
     }
 
-    public void reset () {
-        maxLevel= new HashMap<>();
+    public void reset() {
+        maxLevel = new HashMap<>();
         bl = new HashMap<>();
         generatorTime = new HashMap<>();
         generatorItem = new HashMap<>();
@@ -57,16 +54,16 @@ public class Generators implements Listener {
 
         int i;
 
-        for ( i = 0; i < main.genUid.size(); i++ ) {
+        for (i = 0; i < main.genUid.size(); i++) {
             uids.add(i);
         }
 
-        for ( i = 0; i < uids.size(); i++ ) {
+        for (i = 0; i < uids.size(); i++) {
             int id = uids.get(i);
             String idS = id + ".";
             main.gens.getConfig().set("Generators.locations." + idS + "item", main.genItem.get(id).toString());
             main.gens.getConfig().set("Generators.locations." + idS + "level", main.genStarterLvl.get(id));
-            main.gens.getConfig().set("Generators.locations." + idS + "location", main.loc.compileLoc(main.genLoc.get(id), false) );
+            main.gens.getConfig().set("Generators.locations." + idS + "location", main.loc.compileLoc(main.genLoc.get(id), false));
 
 
         }
@@ -85,7 +82,7 @@ public class Generators implements Listener {
 
 
             String itemS = main.gens.getConfig().getString("Generators.locations." + id + ".item");
-            System.out.println("CURRENT ITEM: "+ itemS);
+            System.out.println("CURRENT ITEM: " + itemS);
 
             int lvl = main.gens.getConfig().getInt("Generators.locations." + id + ".level");
             Location loc = main.loc.decompileLoc(main.gens.getConfig().getString("Generators.locations." + id + ".location"));
@@ -128,11 +125,11 @@ public class Generators implements Listener {
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
             public void run() {
 
-                if(!main.map.isLoaded()) {
+                if (!main.map.isLoaded()) {
                     main.map.load();
                 }
 
-                for ( Map.Entry<Integer, Integer> entry : main.genTime.entrySet() ) {
+                for (Map.Entry<Integer, Integer> entry : main.genTime.entrySet()) {
                     int key = entry.getKey(); //uid
                     int value = entry.getValue();
 
@@ -234,7 +231,7 @@ public class Generators implements Listener {
                     if (!mxLvl) {
                         upgradeM.setLore(Arrays.asList(ChatColor.GRAY + "Next upgrade: " + genTime + "s", ChatColor.GRAY + "Upgrade costs " + costItem.getAmount() + " " + main.shop.getItemName(costItem.getType().toString())));
                     } else {
-                        upgradeM.setLore(Arrays.asList(ChatColor.GRAY + "This generator is on maximum level"));
+                        upgradeM.setLore(Collections.singletonList(ChatColor.GRAY + "This generator is on maximum level"));
                     }
                     upgrade.setItemMeta(upgradeM);
 
@@ -247,9 +244,9 @@ public class Generators implements Listener {
                     int generatingTime = (Integer) main.customMe.getStarterValue(main.customMe.getGenItem(b)).get(main.customMe.getGenLvl(b));
 
                     if (generatingTime < 900) {
-                        timeM.setLore(Arrays.asList(ChatColor.GRAY + "Current generating time: " + generatingTime + "s"));
+                        timeM.setLore(Collections.singletonList(ChatColor.GRAY + "Current generating time: " + generatingTime + "s"));
                     } else {
-                        timeM.setLore(Arrays.asList(ChatColor.GRAY + "Current generating time: 0s"));
+                        timeM.setLore(Collections.singletonList(ChatColor.GRAY + "Current generating time: 0s"));
                     }
                     time.setItemMeta(timeM);
 
@@ -332,7 +329,7 @@ public class Generators implements Listener {
                     } else {
 
                         int has = 0;
-                        for ( int i = 0; i < 36; i++ ) {
+                        for (int i = 0; i < 36; i++) {
                             ItemStack slot = p.getInventory().getItem(i);
                             if (slot == null || !slot.isSimilar(new ItemStack(costItem.getType())))
                                 continue;
@@ -359,9 +356,8 @@ public class Generators implements Listener {
     }
 
 
-
     @EventHandler
-    public void invClose (InventoryCloseEvent e) {
+    public void invClose(InventoryCloseEvent e) {
         if (e.getView().getTitle().equals("Generator") && e.getInventory().getHolder() == e.getPlayer()) {
             Inventory inv = e.getInventory();
             bl.remove(inv);
@@ -371,8 +367,8 @@ public class Generators implements Listener {
             generatorItem.remove(inv);
             generatorTime.remove(inv);
         }
-        }
     }
+}
 
 
 

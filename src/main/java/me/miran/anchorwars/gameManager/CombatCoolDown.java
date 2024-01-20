@@ -8,31 +8,32 @@ import org.bukkit.command.CommandSender;
 
 import java.awt.*;
 
-public class CombatCoolDown implements CommandExecutor{
+public class CombatCoolDown implements CommandExecutor {
 
 
-        private final Main main;
-        public CombatCoolDown (Main main) {this.main = main;}
+    private final Main main;
 
-        @Override
-        public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public CombatCoolDown(Main main) {
+        this.main = main;
+    }
 
-                if (sender.isOp()) {
-                    if(main.customMe.isInt(args[0])) {
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-                        main.hitCoolDown = Integer.parseInt(args[0]);
-                        sender.sendMessage(ChatColor.GREEN + "Combat time was successfully set to " + net.md_5.bungee.api.ChatColor.of(Color.orange) + main.hitCoolDown);
+        if (sender.isOp()) {
+            if (main.customMe.isInt(args[0])) {
 
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "Incorrect use of command, please use: /.setCombatTime <time>");
-                    }
+                main.hitCoolDown = Integer.parseInt(args[0]);
+                sender.sendMessage(ChatColor.GREEN + "Combat time was successfully set to " + net.md_5.bungee.api.ChatColor.of(Color.orange) + main.hitCoolDown);
 
-                }
+            } else {
+                sender.sendMessage(ChatColor.RED + "Incorrect use of command, please use: /.setCombatTime <time>");
+            }
 
-            return false;
         }
 
-
+        return false;
+    }
 
 
 }

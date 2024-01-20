@@ -12,10 +12,10 @@ import java.util.logging.Level;
 
 public class WorldManager {
 
-    private LoadWorld loadWorld = new LoadWorld();
-    private SaveWorld saveWorld = new SaveWorld();
+    private final LoadWorld loadWorld = new LoadWorld();
+    private final SaveWorld saveWorld = new SaveWorld();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -25,10 +25,9 @@ public class WorldManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-            this.configFile = new File(this.main.getDataFolder(), "world.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "world.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("world.yml");
@@ -39,7 +38,7 @@ public class WorldManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -48,7 +47,7 @@ public class WorldManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
@@ -58,8 +57,8 @@ public class WorldManager {
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "world.yml");
         }
         if (!this.configFile.exists()) {

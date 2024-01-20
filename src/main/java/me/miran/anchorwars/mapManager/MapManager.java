@@ -11,13 +11,12 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 
 
-
 public class MapManager {
 
-   private LoadMap loadMap = new LoadMap();
-  private  SaveMap saveMap = new SaveMap();
+    private final LoadMap loadMap = new LoadMap();
+    private final SaveMap saveMap = new SaveMap();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -27,10 +26,9 @@ public class MapManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-           this.configFile = new File(this.main.getDataFolder(), "map.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "map.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("map.yml");
@@ -41,7 +39,7 @@ public class MapManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -50,18 +48,18 @@ public class MapManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
             this.getConfig().save(this.configFile);
         } catch (IOException e) {
-           this.main.getLogger().log(Level.SEVERE, "Could not save config (map) to " + this.configFile, e);
+            this.main.getLogger().log(Level.SEVERE, "Could not save config (map) to " + this.configFile, e);
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "map.yml");
         }
         if (!this.configFile.exists()) {

@@ -11,10 +11,10 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 
 public class KitsManager {
-    private LoadKits loadKits = new LoadKits();
-    private SaveKits saveKits = new SaveKits();
+    private final LoadKits loadKits = new LoadKits();
+    private final SaveKits saveKits = new SaveKits();
 
-    private Main main;
+    private final Main main;
     private FileConfiguration mapConfig = null;
     private File configFile = null;
 
@@ -24,10 +24,9 @@ public class KitsManager {
     }
 
 
-
     public void reloadConfig() {
-        if (this.configFile == null)  {
-            this.configFile = new File(this.main.getDataFolder(), "kits.yml") ;
+        if (this.configFile == null) {
+            this.configFile = new File(this.main.getDataFolder(), "kits.yml");
         }
         this.mapConfig = YamlConfiguration.loadConfiguration(this.configFile);
         InputStream defaultStream = this.main.getResource("kits.yml");
@@ -38,7 +37,7 @@ public class KitsManager {
         }
     }
 
-    public FileConfiguration getConfig () {
+    public FileConfiguration getConfig() {
         if (this.mapConfig == null) {
             reloadConfig();
         }
@@ -47,7 +46,7 @@ public class KitsManager {
     }
 
     public void saveConfig() {
-        if (this.mapConfig == null || this.configFile == null){
+        if (this.mapConfig == null || this.configFile == null) {
             return;
         }
         try {
@@ -57,8 +56,8 @@ public class KitsManager {
         }
     }
 
-    public void saveDefaultConfig () {
-        if(this.configFile == null) {
+    public void saveDefaultConfig() {
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "kits.yml");
         }
         if (!this.configFile.exists()) {

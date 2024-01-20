@@ -10,14 +10,14 @@ public class SetMinPlayersWaiting implements CommandExecutor {
 
     Main main;
 
-    public SetMinPlayersWaiting (Main main) {
+    public SetMinPlayersWaiting(Main main) {
         this.main = main;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.isOp() &&main.customMe.isInt(args[0])) {
-            main.minPlayerCount = Integer.parseInt( args[0]);
+        if (sender.isOp() && main.customMe.isInt(args[0])) {
+            main.minPlayerCount = Integer.parseInt(args[0]);
         } else {
             sender.sendMessage(ChatColor.RED + args[0] + " is number!");
         }

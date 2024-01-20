@@ -12,22 +12,18 @@ import java.util.ArrayList;
 public class ScoreBoard {
 
 
-
     Main main;
-
-    public ScoreBoard(Main main) {
-        this.main = main;
-    }
-
+    boolean updating = false;
+    ArrayList<Player> scoreboards = new ArrayList<>();
     private int seconds = 0;
     private int minutes = 0;
     private int hours = 0;
     private int id;
+    public ScoreBoard(Main main) {
+        this.main = main;
+    }
 
-    boolean updating = false;
-     ArrayList<Player> scoreboards = new ArrayList<>();
-
-    public void addScoreBoard (Player p) {
+    public void addScoreBoard(Player p) {
 
         if (!updating) {
             updating = true;
@@ -37,7 +33,7 @@ public class ScoreBoard {
 
     }
 
-    public void reset () {
+    public void reset() {
         scoreboards = new ArrayList<>();
         updating = false;
         seconds = 0;
@@ -45,11 +41,11 @@ public class ScoreBoard {
         hours = 0;
     }
 
-    public void startUpdating () {
-       id =  Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
+    public void startUpdating() {
+        id = Bukkit.getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
 
             public void run() {
-                if(!updating || scoreboards.size() == 0) {
+                if (!updating || scoreboards.size() == 0) {
                     Bukkit.getScheduler().cancelTask(id);
                     return;
                 }
@@ -61,11 +57,10 @@ public class ScoreBoard {
                     seconds = 0;
                     minutes++;
 
-                    if(hours == 0) {
+                    if (hours == 0) {
                         if (minutes == 5) {
                             main.phase.setPhase(1);
-                        }else
-                        if(minutes == 8) {
+                        } else if (minutes == 8) {
                             main.phase.setPhase(2);
                         } else if (minutes == 20) {
                             main.phase.setPhase(3);
@@ -73,7 +68,7 @@ public class ScoreBoard {
                             main.phase.setPhase(4);
                         }
 
-                    } else if (hours == 1 &&main.phase.getPhase() !=5) {
+                    } else if (hours == 1 && main.phase.getPhase() != 5) {
                         main.phase.setPhase(5);
                     }
                 }
@@ -83,24 +78,24 @@ public class ScoreBoard {
                 }
 
                 //seconds
-            if (seconds ==0) {
-                time = "00";
-            } else if (seconds <10) {
-                time = "0" + seconds;
-            }else {
-                time = seconds + "";
-            }
-            //minutes
-                if (minutes ==0) {
-                    time =  "00:" + time;
-                } else if (minutes <10) {
+                if (seconds == 0) {
+                    time = "00";
+                } else if (seconds < 10) {
+                    time = "0" + seconds;
+                } else {
+                    time = seconds + "";
+                }
+                //minutes
+                if (minutes == 0) {
+                    time = "00:" + time;
+                } else if (minutes < 10) {
                     time = "0" + minutes + ":" + time;
                 } else {
                     time = minutes + ":" + time;
                 }
                 time = hours + ":" + time;
 
-                for(Player p : scoreboards) {
+                for (Player p : scoreboards) {
                     if (!p.isOnline()) {
                         scoreboards.remove(p);
                         continue;
@@ -111,7 +106,6 @@ public class ScoreBoard {
                     Scoreboard board = manager.getNewScoreboard();
                     Objective obj = board.registerNewObjective("Game", "dummy", ChatColor.DARK_RED + "" + ChatColor.BOLD + "Anchor Wars");
                     obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-
 
 
                     for (Player player : scoreboards) {
@@ -126,7 +120,7 @@ public class ScoreBoard {
 
                         String color = main.teams.getConfig().getString("Teams." + teamOfP + ".color");
                         String name = DataManager.names.get(teamOfP);
-                        if(name == null) {
+                        if (name == null) {
                             continue;
                         }
                         name = name.substring(0, 1).toUpperCase();
@@ -144,7 +138,7 @@ public class ScoreBoard {
 
                     position--;
 
-                    Score phase = obj.getScore(ChatColor.translateAlternateColorCodes('&', "&6Phase: &a"  + main.phase.getPhase()));
+                    Score phase = obj.getScore(ChatColor.translateAlternateColorCodes('&', "&6Phase: &a" + main.phase.getPhase()));
                     phase.setScore(position);
 
                     position--;
@@ -154,10 +148,10 @@ public class ScoreBoard {
 
                     position--;
 
-                    for (String team : DataManager.teams ) {
+                    for (String team : DataManager.teams) {
                         String color = main.teams.getConfig().getString("Teams." + team + ".color");
                         String name = DataManager.names.get(team);
-                        Score anchor = obj.getScore(ChatColor.translateAlternateColorCodes('&', "&l" + color + name.toUpperCase() + "&r " + main.customMe.getAnchorLevel(team) + "% (&7"  + main.customMe.getTeamPlayers(team).size() + "&r)" ));
+                        Score anchor = obj.getScore(ChatColor.translateAlternateColorCodes('&', "&l" + color + name.toUpperCase() + "&r " + main.customMe.getAnchorLevel(team) + "% (&7" + main.customMe.getTeamPlayers(team).size() + "&r)"));
                         anchor.setScore(position);
 
                         position--;
@@ -193,7 +187,6 @@ public class ScoreBoard {
                     }
 
 
-
                     p.setScoreboard(board);
 
 
@@ -201,15 +194,15 @@ public class ScoreBoard {
 
             }
 
-        }, 0L,20L);
+        }, 0L, 20L);
     }
 
 
-    public net.md_5.bungee.api.ChatColor getHealthColor (int health) {
+    public net.md_5.bungee.api.ChatColor getHealthColor(int health) {
         if (health >= 15) {
             return net.md_5.bungee.api.ChatColor.DARK_GREEN;
         } else if (health >= 10) {
-           return net.md_5.bungee.api.ChatColor.GREEN;
+            return net.md_5.bungee.api.ChatColor.GREEN;
         } else if (health >= 5) {
             return net.md_5.bungee.api.ChatColor.RED;
         } else {

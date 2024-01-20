@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import java.io.*;
 
 public final class FileUtil {
-    public static boolean copy (File source, File destination) throws IOException {
+    public static boolean copy(File source, File destination) throws IOException {
         if (source.isDirectory()) {
             if (!destination.exists()) {
                 destination.mkdir();
@@ -46,7 +46,7 @@ public final class FileUtil {
         return true;
     }
 
-    public static  void delete (File file) {
+    public static void delete(File file) {
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (files == null) return;

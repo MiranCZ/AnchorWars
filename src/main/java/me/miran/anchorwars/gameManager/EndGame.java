@@ -11,13 +11,13 @@ public class EndGame {
 
     Main main;
 
-    public EndGame (Main main) {
+    public EndGame(Main main) {
         this.main = main;
     }
 
     public void endGame() {
 
-        for ( Entity entity : main.droppedItems ) {
+        for (Entity entity : main.droppedItems) {
 
             entity.remove();
         }
@@ -30,7 +30,7 @@ public class EndGame {
 
         main.pvp = false;
 
-        for ( Player p : main.map.getWorld().getPlayers() ) {
+        for (Player p : main.map.getWorld().getPlayers()) {
             p.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
             main.pl.getP(p).reset();
             main.customMe.tpToLobby(p);
@@ -48,8 +48,6 @@ public class EndGame {
 
         main.customMe.resetJoinSign();
         main.customMe.reset();
-
-
 
 
     }

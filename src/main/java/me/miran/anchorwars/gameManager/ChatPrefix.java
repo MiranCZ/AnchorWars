@@ -15,15 +15,15 @@ public class ChatPrefix implements Listener {
 
     Main main;
 
-    public ChatPrefix (Main main) {
+    public ChatPrefix(Main main) {
         this.main = main;
     }
 
 
     @EventHandler
-    public void onChat (AsyncPlayerChatEvent e) {
+    public void onChat(AsyncPlayerChatEvent e) {
 
-        if (main.customMe == null)  {
+        if (main.customMe == null) {
             return;
         }
 
@@ -52,17 +52,17 @@ public class ChatPrefix implements Listener {
         if (DataManager.teams.contains(team)) {
             team = "." + team;
 
-            prefix =  main.teams.getConfig().getString("Teams" + team + ".name" );
-            prefixColor = main.teams.getConfig().getString("Teams" + team + ".color" );
+            prefix = main.teams.getConfig().getString("Teams" + team + ".name");
+            prefixColor = main.teams.getConfig().getString("Teams" + team + ".color");
         } else {
-            if(main.map.isLoaded()) {
+            if (main.map.isLoaded()) {
                 if (p.getWorld() == main.map.getWorld()) {
                     prefix = "spectator";
                     prefixColor = "&7";
                 }
             }
             if (main.wLobby.isLoaded()) {
-                if(main.wLobby.getWorld() == p.getWorld()) {
+                if (main.wLobby.getWorld() == p.getWorld()) {
                     prefix = "WAITING";
                     prefixColor = "&6";
                 }
@@ -71,20 +71,19 @@ public class ChatPrefix implements Listener {
                 if (main.wLobby.isLoaded()) {
                     sendTo.addAll(main.wLobby.getWorld().getPlayers());
                 }
-            prefix = "HUB";
-            prefixColor = "&2";
+                prefix = "HUB";
+                prefixColor = "&2";
             }
 
         }
 
-       String preMassage = "§8[" + prefixColor + prefix + "§8]" + "&7 " + p.getName() + ": ";
+        String preMassage = "§8[" + prefixColor + prefix + "§8]" + "&7 " + p.getName() + ": ";
 
         for (Player player : sendTo) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', preMassage + "&r")  +message);
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', preMassage + "&r") + message);
         }
 
     }
-
 
 
 }

@@ -11,14 +11,14 @@ public class DropItem implements Listener {
 
     Main main;
 
-   public DropItem(Main main) {
+    public DropItem(Main main) {
         this.main = main;
 
     }
 
 
     @EventHandler
-    public void dropItem (EntitySpawnEvent e) {
+    public void dropItem(EntitySpawnEvent e) {
 
         if (e.getEntityType() == EntityType.DROPPED_ITEM) {
             main.droppedItems.add(e.getEntity());

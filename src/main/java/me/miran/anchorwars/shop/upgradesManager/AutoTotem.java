@@ -17,12 +17,12 @@ public class AutoTotem implements Listener {
 
     Main main;
 
-    public AutoTotem (Main main) {
+    public AutoTotem(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void playerDamage (EntityDamageEvent e) {
+    public void playerDamage(EntityDamageEvent e) {
 
         if (e.getEntityType() == EntityType.PLAYER) {
             Player p = (Player) e.getEntity();
@@ -53,7 +53,6 @@ public class AutoTotem implements Listener {
             }
         }
     }
-
 
 
 }
